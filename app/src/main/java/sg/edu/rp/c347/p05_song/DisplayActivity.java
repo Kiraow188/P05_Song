@@ -60,6 +60,7 @@ public class DisplayActivity extends AppCompatActivity {
                 DBHelper db = new DBHelper(DisplayActivity.this);
                 final ArrayList<Song> yearsong = db.getAllSongsbyYear(current);
                 aaf = new CustomAdapter(DisplayActivity.this, R.layout.row, yearsong);
+                lv.setAdapter(aaf);
                 db.close();
             }
 
