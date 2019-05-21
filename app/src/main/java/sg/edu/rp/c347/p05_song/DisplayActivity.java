@@ -17,7 +17,7 @@ public class DisplayActivity extends AppCompatActivity {
     Spinner spn;
     ListView lv;
     Button btn5stars;
-    ArrayAdapter aa, aaf;
+    ArrayAdapter aa, aaf, aas;
     ArrayList<Song> al;
 
     @Override
@@ -37,7 +37,8 @@ public class DisplayActivity extends AppCompatActivity {
         al = db.getAllSongs();
 
         final ArrayList<Song> data =  db.getAllSongs();
-        final ArrayList<Song> five = db.getAllSongs(5);
+        final ArrayList<Song> five = db.getAllSongsbyStar(5);
+
         final ArrayList<String> year = db.getAllYear();
         db.close();
 
@@ -55,7 +56,11 @@ public class DisplayActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
-                Log.v("item", (String) parent.getItemAtPosition(position));
+                Integer current = Integer.parseInt(year.get(position));
+                DBHelper db = new DBHelper(DisplayActivity.this);
+                final ArrayList<Song> yearsong = db.getAllSongsbyYear(current);
+                aaf = new CustomAdapter(DisplayActivity.this, R.layout.row, yearsong);
+                db.close();
             }
 
             @Override
