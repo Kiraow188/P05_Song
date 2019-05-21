@@ -134,9 +134,9 @@
 </LinearLayout>
 
     <Button
-        android:layout_height="wrap_content"
+        android:id="@+id/btnCancel"
         android:layout_width="match_parent"
-        android:text="Cancel"
-        android:id="@+id/btnCancel"/>
+        android:layout_height="wrap_content"
+        android:text="Cancel" />
 
 </LinearLayout>

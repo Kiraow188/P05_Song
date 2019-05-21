@@ -15,7 +15,7 @@ public class ThirdActivity extends AppCompatActivity {
 
     TextView tvID;
     EditText etTitle, etSinger, etYear;
-    Button btnUpdate, btnDelete;
+    Button btnUpdate, btnDelete, btnCancel;
     Song data;
     RadioGroup rg;
 
@@ -31,6 +31,7 @@ public class ThirdActivity extends AppCompatActivity {
         etYear = findViewById(R.id.etYear);
         btnUpdate = findViewById(R.id.btnUpdate);
         btnDelete = findViewById(R.id.btnDelete);
+        btnCancel = findViewById(R.id.btnCancel);
 
         Intent i = getIntent();
         data = (Song) i.getSerializableExtra("data");
@@ -78,6 +79,13 @@ public class ThirdActivity extends AppCompatActivity {
                 i.putExtra("data", data.getId());
                 setResult(RESULT_OK, i);
 
+                finish();
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
             }
         });
