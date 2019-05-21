@@ -16,7 +16,7 @@ public class DisplayActivity extends AppCompatActivity {
     Spinner spn;
     ListView lv;
     Button btn5stars;
-    ArrayAdapter aa, aaf;
+    ArrayAdapter aa, aaf, aas;
     ArrayList<Song> al;
 
     @Override
@@ -31,8 +31,6 @@ public class DisplayActivity extends AppCompatActivity {
         db.getWritableDatabase();
         db.close();
 
-
-
         al = new ArrayList<Song>();
         lv = findViewById(R.id.lv);
         al = db.getAllSongs();
@@ -46,6 +44,7 @@ public class DisplayActivity extends AppCompatActivity {
         aaf = new CustomAdapter(this,R.layout.row, five);
 
 
+        spn.setAdapter(aas);
         lv.setAdapter(aa);
         aa.notifyDataSetChanged();
 
