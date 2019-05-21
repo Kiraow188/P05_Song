@@ -70,9 +70,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 String title = cursor.getString(1);
                 String singer = cursor.getString(2);
                 int year = cursor.getInt(3);
-
-
-
                 int stars = cursor.getInt(4);
                 Song obj = new Song(id, title, singer, year, stars);
                 songs.add(obj);
@@ -81,6 +78,24 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return songs;
+    }
+
+    public ArrayList<String> getAllYear() {
+        ArrayList<String> years = new ArrayList<>();
+
+        String yearQuery = "SELECT " + COLUMN_YEAR + " FROM " + TABLE_SONG;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(yearQuery, null);
+        if (cursor.moveToFirst()){
+            do{
+                String year = String.valueOf(cursor.getInt(0));
+                years.add(year);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return years;
     }
 
     public ArrayList<Song> getAllSongs(int keyword) {

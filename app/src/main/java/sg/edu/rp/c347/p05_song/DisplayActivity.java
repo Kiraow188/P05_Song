@@ -8,11 +8,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
 public class DisplayActivity extends AppCompatActivity {
-
+    Spinner spn;
     ListView lv;
     Button btn5stars;
     ArrayAdapter aa, aaf;
@@ -24,27 +25,26 @@ public class DisplayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display);
 
         btn5stars = findViewById(R.id.btn5Stars);
+        spn = findViewById(R.id.spinner);
 
         DBHelper db = new DBHelper(this);
         db.getWritableDatabase();
         db.close();
 
+
+
         al = new ArrayList<Song>();
-
         lv = findViewById(R.id.lv);
-
         al = db.getAllSongs();
 
         final ArrayList<Song> data =  db.getAllSongs();
-
         final ArrayList<Song> five = db.getAllSongs(5);
-
-
+        final ArrayList<String> year = db.getAllYear();
         db.close();
 
         aa = new CustomAdapter(this, R.layout.row, data);
-
         aaf = new CustomAdapter(this,R.layout.row, five);
+
 
         lv.setAdapter(aa);
         aa.notifyDataSetChanged();
