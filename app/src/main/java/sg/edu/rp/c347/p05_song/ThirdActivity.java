@@ -41,10 +41,10 @@ public class ThirdActivity extends AppCompatActivity {
         etSinger.setText(data.getSingers());
         etYear.setText(String.valueOf(data.getYear()));
         int radio = data.getStars();
-        /*rg = (RadioGroup) findViewById(R.id.rg);
+        rg = (RadioGroup) findViewById(R.id.rg);
         rg.clearCheck();
         ((RadioButton)rg.getChildAt(radio-1)).setChecked(true);
-*/
+
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
