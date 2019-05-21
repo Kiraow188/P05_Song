@@ -17,7 +17,7 @@ public class DisplayActivity extends AppCompatActivity {
     Spinner spn;
     ListView lv;
     Button btn5stars;
-    ArrayAdapter aa, aaf, aas;
+    ArrayAdapter aa, aaf;
     ArrayList<Song> al;
 
     @Override
@@ -44,10 +44,25 @@ public class DisplayActivity extends AppCompatActivity {
         aa = new CustomAdapter(this, R.layout.row, data);
         aaf = new CustomAdapter(this,R.layout.row, five);
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, year);
 
-        spn.setAdapter(aas);
+        spn.setAdapter(adapter);
         lv.setAdapter(aa);
         aa.notifyDataSetChanged();
+
+        spn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                Log.v("item", (String) parent.getItemAtPosition(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+            }
+        });
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
