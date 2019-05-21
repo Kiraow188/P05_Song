@@ -59,7 +59,8 @@ public class DisplayActivity extends AppCompatActivity {
                 Integer current = Integer.parseInt(year.get(position));
                 DBHelper db = new DBHelper(DisplayActivity.this);
                 final ArrayList<Song> yearsong = db.getAllSongsbyYear(current);
-                aaf = new CustomAdapter(DisplayActivity.this, R.layout.row, yearsong);
+                ArrayAdapter aay = new CustomAdapter(DisplayActivity.this, R.layout.row, yearsong);
+                lv.setAdapter(aay);
                 db.close();
             }
 

@@ -21,7 +21,8 @@
         <TextView
             android:id="@+id/tvYear"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="#F08080"/>
 
         <TextView
             android:id="@+id/tvName"
