@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String title = etTitle.getText().toString();
                 String singers = etSingers.getText().toString();
-                Integer year = Integer.parseInt(etYear.getText().toString());
                 int selectedButtonId = rgStars.getCheckedRadioButtonId();
                 RadioButton rb = findViewById(selectedButtonId);
                 Integer stars = Integer.parseInt(rb.getText().toString());
@@ -50,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Field(s) is/are empty, please fill up everything",
                             Toast.LENGTH_LONG).show();
                 }else{
+                    Integer year = Integer.parseInt(etYear.getText().toString());
                     DBHelper dbh = new DBHelper(MainActivity.this);
                     long row_affected = dbh.insertSong(title, singers, year, stars);
                     dbh.close();
