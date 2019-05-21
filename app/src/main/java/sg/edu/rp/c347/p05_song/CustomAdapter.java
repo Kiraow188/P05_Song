@@ -1,4 +1,4 @@
-package sg.edu.rp.c346.p05_ndpsongs;
+package sg.edu.rp.c347.p05_song;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -20,7 +20,6 @@ public class CustomAdapter extends ArrayAdapter<Song> {
     ImageView iv1, iv2, iv3, iv4, iv5;
     TextView tvYear, tvTitle, tvSinger;
 
-
     public CustomAdapter(Context context, int resource, ArrayList<Song> songs) {
         super(context, resource, songs);
         this.context = context;
@@ -28,7 +27,6 @@ public class CustomAdapter extends ArrayAdapter<Song> {
         this.resource = resource;
 
     }
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -38,7 +36,7 @@ public class CustomAdapter extends ArrayAdapter<Song> {
         View rowView = inflater.inflate(resource, parent, false);
 
         tvYear = rowView.findViewById(R.id.tvYear);
-        tvTitle = rowView.findViewById(R.id.tvTitle);
+        tvTitle = rowView.findViewById(R.id.tvName);
         tvSinger = rowView.findViewById(R.id.tvSinger);
         iv1 = rowView.findViewById(R.id.imageView1star);
         iv2 = rowView.findViewById(R.id.imageView2star);
@@ -97,7 +95,6 @@ public class CustomAdapter extends ArrayAdapter<Song> {
             iv1.setImageResource(android.R.drawable.btn_star_big_off);
 
         }
-
         return rowView;
     }
 }

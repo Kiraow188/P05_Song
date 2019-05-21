@@ -1,6 +1,8 @@
 package sg.edu.rp.c347.p05_song;
 
-public class Song {
+import java.io.Serializable;
+
+public class Song implements Serializable {
 
     private int id;
     private String title;
