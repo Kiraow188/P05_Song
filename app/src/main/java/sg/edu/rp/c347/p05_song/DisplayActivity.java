@@ -67,6 +67,8 @@ public class DisplayActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 // TODO Auto-generated method stub
+                aa = new CustomAdapter(DisplayActivity.this, R.layout.row, data);
+                lv.setAdapter(aa);
             }
         });
 
