@@ -28,7 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createNoteTableSql = "CREATE TABLE " + TABLE_SONG + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + COLUMN_TITLE + " TEXT, " + COLUMN_SINGERS + " TEXT, " + COLUMN_YEAR + " INTEGAR, " + COLUMN_STARS + " INTEGAR) ";
+                + COLUMN_TITLE + " TEXT, " + COLUMN_SINGERS + " TEXT, " + COLUMN_YEAR + " INTEGER, " + COLUMN_STARS + " INTEGER) ";
         db.execSQL(createNoteTableSql);
         Log.i("info", "created tables");
     }
@@ -48,12 +48,16 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_STARS, stars);
         long result = db.insert(TABLE_SONG, null, values);
         db.close();
-        Log.d("SQL Insert ",""+ result); //id returned, shouldn’t be -1
+        if (result == -1){
+            Log.d("DBHelper", "Insert failed");
+        } else{
+            Log.d("SQL Insert ",""+ result);
+        }
         return result;
     }
 
-    public ArrayList<String> getAllSongs() {
-        ArrayList<String> songs = new ArrayList<String>();
+    public ArrayList<Song> getAllSongs() {
+        ArrayList<Song> songs = new ArrayList<Song>();
 
         String selectQuery = "SELECT " + COLUMN_ID + ","
                 + COLUMN_TITLE + "," + COLUMN_SINGERS + "," + COLUMN_YEAR + "," + COLUMN_STARS + " FROM " + TABLE_SONG;
@@ -63,8 +67,15 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 int id = cursor.getInt(0);
-                String content = cursor.getString(1);
-                songs.add("ID:" + id + ", " + content);
+                String title = cursor.getString(1);
+                String singer = cursor.getString(2);
+                int year = cursor.getInt(3);
+
+
+
+                int stars = cursor.getInt(4);
+                Song obj = new Song(id, title, singer, year, stars);
+                songs.add(obj);
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -72,13 +83,13 @@ public class DBHelper extends SQLiteOpenHelper {
         return songs;
     }
 
-    public ArrayList<Song> getAllSongs(Integer stars) {
+    public ArrayList<Song> getAllSongs(int keyword) {
         ArrayList<Song> songs = new ArrayList<Song>();
 
         SQLiteDatabase db = this.getReadableDatabase();
         String[] columns= {COLUMN_ID, COLUMN_TITLE, COLUMN_SINGERS, COLUMN_YEAR, COLUMN_STARS};
         String condition = COLUMN_STARS + " Like ?";
-        String[] args = { "%" +  stars + "%"};
+        String[] args = { "==" + keyword};
         Cursor cursor = db.query(TABLE_SONG, columns, condition, args,
                 null, null, null, null);
 
@@ -86,11 +97,14 @@ public class DBHelper extends SQLiteOpenHelper {
             do {
                 int id = cursor.getInt(0);
                 String title = cursor.getString(1);
-                String singers = cursor.getString(2);
+                String singer = cursor.getString(2);
                 int year = cursor.getInt(3);
-                int star = cursor.getInt(4);
-                Song song = new Song(id, title, singers, year, star);
-                songs.add(song);
+
+
+
+                int stars = cursor.getInt(4);
+                Song obj = new Song(id, title, singer, year, stars);
+                songs.add(obj);
             } while (cursor.moveToNext());
         }
         cursor.close();
