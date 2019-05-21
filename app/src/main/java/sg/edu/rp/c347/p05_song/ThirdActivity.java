@@ -52,7 +52,10 @@ public class ThirdActivity extends AppCompatActivity {
                 data.setTitle(etTitle.getText().toString());
                 data.setSingers(etSinger.getText().toString());
                 data.setYear(Integer.parseInt(etYear.getText().toString()));
-                data.setStars(rg.getCheckedRadioButtonId());
+                int selectedButtonId = rg.getCheckedRadioButtonId();
+                RadioButton rb = findViewById(selectedButtonId);
+                Integer stars = Integer.parseInt(rb.getText().toString());
+                data.setStars(stars);
                 dbh.updateSong(data);
                 dbh.close();
 
